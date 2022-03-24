@@ -11,7 +11,7 @@ import {
  * 将代码提交至git
  */
 export async function _gitPush() {
-  timeLog('推送代码至git仓库', 'start');
+  timeLog('准备推送代码至git仓库', 'start');
   await run(`${GIT_ADD} .`);
   const commitMsg = await checkCommit();
   const isMath =
@@ -22,9 +22,9 @@ export async function _gitPush() {
     console.log(COMMIT_REEOR_MESSAGE);
     throw new Error();
   }
-  await run(`${GIT_COMMIT} -m "v${commitMsg}" -n`);
+  await run(`${GIT_COMMIT} -m "${commitMsg}" -n`);
   await run(GIT_PUSH);
-  timeLog('推送代码至git仓库', 'end');
+  timeLog('已推送代码至git仓库', 'end');
   return true;
 }
 
