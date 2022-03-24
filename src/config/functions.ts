@@ -31,9 +31,9 @@ export function compose(middleware) {
   function dispatch(index, otherOptions) {
     if (index == middleware.length) return;
     const currMiddleware = middleware[index];
-    return currMiddleware((addOptions) =>
-      dispatch(++index, { ...otherOptions, ...addOptions })
-    );
+    return currMiddleware((addOptions) => {
+      dispatch(++index, { ...otherOptions, ...addOptions });
+    }, otherOptions);
   }
   dispatch(0, otherOptions);
 }
@@ -42,8 +42,6 @@ export function compose(middleware) {
  * 获取当前package.json的版本号
  */
 export const getOriginPackageJson = (): Record<string, any> => {
-  const packageJson = JSON.parse(
-    fs.readFileSync(getProjectPath('package.json'), 'utf-8')
-  );
+  const packageJson = JSON.parse(fs.readFileSync(getProjectPath('package.json'), 'utf-8'));
   return packageJson;
 };

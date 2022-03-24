@@ -4,7 +4,6 @@ import { currentVersion } from '../config/constans';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import { getProjectPath, run, timeLog } from '../config/functions';
-import pkg from '../package.json';
 
 /**
  * 列出所有下一个版本的列表
@@ -48,13 +47,13 @@ export async function _selectNextVersion(): Promise<string> {
  * @param nextVersion 新版本号
  */
 export async function _updateVersion(nextVersion: string, originPackageJson) {
-  timeLog('修改package.json版本号', 'start');
+  timeLog('开始修改package.json版本号', 'start');
   fs.writeFileSync(
     getProjectPath('package.json'),
     JSON.stringify({ ...originPackageJson, version: nextVersion })
   );
   await run('npx prettier package.json --write');
-  timeLog('修改package.json版本号', 'end');
+  timeLog('已经完成修改package.json版本号', 'end');
   return async () => {
     fs.writeFileSync(
       getProjectPath('package.json'),

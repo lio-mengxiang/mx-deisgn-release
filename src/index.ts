@@ -24,11 +24,10 @@ import {
 } from './config/constans';
 import { compose, getOriginPackageJson } from './config/functions';
 
-const getNextVersion = async (next, otherOptions) => {
+const getNextVersion = async (next) => {
   const nextVersion = await _selectNextVersion();
   const originPackageJson = getOriginPackageJson();
   next({
-    ...otherOptions,
     nextVersion,
     originVersion: originPackageJson.version,
     originPackageJson,
@@ -37,28 +36,28 @@ const getNextVersion = async (next, otherOptions) => {
 
 const getReleaseFns = {
   [updateVersion]: async (next, otherOptions) => {
-    if (otherOptions?.nextVersion) {
+    if (!otherOptions?.nextVersion) {
       throw new Error('请传入package.json新版本号');
     }
-    const backNextVersion = await _updateVersion(
+    const backVersionFn = await _updateVersion(
       otherOptions.nextVersion,
       otherOptions.originPackageJson
     );
-    next({ backNextVersion });
+    next({ backVersionFn });
   },
   [gitPush]: async (next, otherOptions) => {
     const pushResult = await _gitPush().catch(() => false);
     if (!pushResult) {
-      return otherOptions.backVersionFn();
+      return otherOptions?.backVersionFn?.();
     }
-    next();
+    next()
   },
   [setChangelog]: async (next, otherOptions) => {
     const backChangelog = getOldLog();
     const setLogResult = await _setChangelog().catch(() => false);
     if (!setLogResult) {
       backChangelog();
-      return await otherOptions.backVersionFn();
+      return await otherOptions?.backVersionFn();
     }
     next({ backChangelog });
   },
@@ -91,6 +90,7 @@ const getReleaseFns = {
 };
 
 const middle = [getNextVersion];
+
 const defaultMiddleware = [
   updateVersion,
   gitPush,
@@ -104,11 +104,7 @@ middle.push(...defaultMiddleware);
 
 async function defaultMain() {
   try {
-    const startTime = Date.now();
     compose(middle);
-    console.log(
-      `✨ 发布流程结束 共耗时${((Date.now() - startTime) / 1000).toFixed(3)}s`
-    );
   } catch (error) {
     console.log('💣 发布失败，失败原因：', error);
   }
