@@ -4,8 +4,7 @@ import { CHANGELOG_NAME } from "../config/constans";
 
 export const getOldLog = () => {
   const logPath = getProjectPath(CHANGELOG_NAME);
-  console.log('existsSync(logPath): ', existsSync(logPath), logPath);
-  if (existsSync(logPath)) {
+  if (!existsSync(logPath)) {
     fs.writeFileSync(logPath, "");
   }
   const oldFile = fs.readFileSync(logPath);
