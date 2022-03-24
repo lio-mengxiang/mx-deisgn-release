@@ -22,7 +22,7 @@ export async function _gitPush() {
     console.log(COMMIT_REEOR_MESSAGE);
     throw new Error();
   }
-  await run(`${GIT_COMMIT} -m "${commitMsg}" -n`);
+  await run(`${GIT_COMMIT} -m "${commitMsg}"`);
   await run(GIT_PUSH);
   timeLog('已推送代码至git仓库', 'end');
   return true;
