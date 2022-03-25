@@ -31,7 +31,7 @@ const getReleaseFns = {
     if (!otherOptions?.nextVersion) {
       throw new Error('请传入package.json新版本号');
     }
-    const backVersionFn = _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
+    const backVersionFn = await _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
       basicCatchError,
     );
     next({ backVersionFn });
