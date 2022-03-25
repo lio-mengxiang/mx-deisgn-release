@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import ora from 'ora';
 
-const spinner = ora('Loading...')
+const spinner = ora()
 const exec = util.promisify(child_process.exec);
 
 export const run = async (command: string) => {
@@ -52,6 +52,6 @@ export const getOriginPackageJson = (): Record<string, any> => {
  * 工具函数，用来捕获并打印错误，返回false
  */
 export const basicCatchError = (err: Error) => {
-  console.log(chalk.red(err));
+  console.log(`\r\n ${chalk.red(err)}`);
   return false;
 };
