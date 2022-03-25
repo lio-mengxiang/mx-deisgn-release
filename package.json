@@ -1,6 +1,6 @@
 {
   "name": "@mx-design/release",
-  "version": "0.0.42",
+  "version": "1.0.0",
   "description": "Lightweight release script for Front-end project",
   "keywords": [
     "mx-release",
