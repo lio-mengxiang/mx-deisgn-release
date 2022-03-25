@@ -17,7 +17,7 @@ function _publishNpm2() {
           case 0:
             timeLog("发布", "start");
             _context.next = 3;
-            return run("npm publish");
+            return run("npm publish --access=public");
 
           case 3:
             timeLog("发布", "end");

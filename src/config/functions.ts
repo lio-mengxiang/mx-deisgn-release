@@ -45,3 +45,11 @@ export const getOriginPackageJson = (): Record<string, any> => {
   const packageJson = JSON.parse(fs.readFileSync(getProjectPath('package.json'), 'utf-8'));
   return packageJson;
 };
+
+/**
+ * 工具函数，用来捕获并打印错误，返回false
+ */
+export const basicCatchError = (err: Error) => {
+  console.log(chalk.red(err));
+  return false;
+}

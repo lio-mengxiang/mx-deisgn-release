@@ -22,7 +22,7 @@ import {
   publishNpm,
   build,
 } from './config/constans';
-import { compose, getOriginPackageJson } from './config/functions';
+import { compose, getOriginPackageJson, basicCatchError } from './config/functions';
 
 const getNextVersion = async (next) => {
   const nextVersion = await _selectNextVersion();
@@ -42,11 +42,11 @@ const getReleaseFns = {
     const backVersionFn = await _updateVersion(
       otherOptions.nextVersion,
       otherOptions.originPackageJson
-    );
+    ).catch(basicCatchError);
     next({ backVersionFn });
   },
   [gitPush]: async (next, otherOptions) => {
-    const pushResult = await _gitPush().catch(() => false);
+    const pushResult = await _gitPush().catch(basicCatchError);
     if (!pushResult) {
       return otherOptions?.backVersionFn?.();
     }
@@ -54,7 +54,7 @@ const getReleaseFns = {
   },
   [setChangelog]: async (next, otherOptions) => {
     const backChangelog = getOldLog();
-    const setLogResult = await _setChangelog().catch(() => false);
+    const setLogResult = await _setChangelog().catch(basicCatchError);
     if (!setLogResult) {
       backChangelog();
       return await otherOptions?.backVersionFn();
