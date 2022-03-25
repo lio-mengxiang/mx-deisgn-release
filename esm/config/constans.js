@@ -9,9 +9,3 @@ export var GIT_PUSH = "git push";
 
 export var currentVersion = pkg.version;
 export var CHANGELOG_NAME = "CHANGELOG.md";
-export var updateVersion = '_updateVersion';
-export var gitPush = '_gitPush';
-export var setChangelog = 'setChangelog';
-export var build = '_build';
-export var publishNpm = '_publishNpm';
-export var addTag = '_addTag';

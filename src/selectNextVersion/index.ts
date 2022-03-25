@@ -1,23 +1,25 @@
 import semverInc from 'semver/functions/inc';
 import { ReleaseType } from 'semver';
-import { currentVersion } from '../config/constans';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import { getProjectPath, run, timeLog } from '../config/functions';
+import { getOriginPackageJson, getProjectPath, run, timeLog } from '../config/functions';
 
+const currentVersion = getOriginPackageJson()?.version;
 /**
  * 列出所有下一个版本的列表
  * @return {*}  {({ [key in ReleaseType]: string | null })}
  */
-const getNextVersions = (): { [key in ReleaseType]: string | null } => ({
-  major: semverInc(currentVersion, 'major'),
-  minor: semverInc(currentVersion, 'minor'),
-  patch: semverInc(currentVersion, 'patch'),
-  premajor: semverInc(currentVersion, 'premajor'),
-  preminor: semverInc(currentVersion, 'preminor'),
-  prepatch: semverInc(currentVersion, 'prepatch'),
-  prerelease: semverInc(currentVersion, 'prerelease'),
-});
+const getNextVersions = (): { [key in ReleaseType]: string | null } => {
+  return ({
+    major: semverInc(currentVersion, 'major'),
+    minor: semverInc(currentVersion, 'minor'),
+    patch: semverInc(currentVersion, 'patch'),
+    premajor: semverInc(currentVersion, 'premajor'),
+    preminor: semverInc(currentVersion, 'preminor'),
+    prepatch: semverInc(currentVersion, 'prepatch'),
+    prerelease: semverInc(currentVersion, 'prerelease'),
+  })
+};
 
 /**
  * 交互式选择下一个版本号
