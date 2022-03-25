@@ -23,7 +23,7 @@ function _gitPush2() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            timeLog('推送代码至git仓库', 'start');
+            timeLog('准备推送代码至git仓库', 'start');
             _context.next = 3;
             return run("".concat(GIT_ADD, " ."));
 
@@ -36,25 +36,26 @@ function _gitPush2() {
             isMath = /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(commitMsg);
 
             if (isMath) {
-              _context.next = 9;
+              _context.next = 10;
               break;
             }
 
-            throw new Error(COMMIT_REEOR_MESSAGE);
+            console.log(COMMIT_REEOR_MESSAGE);
+            throw new Error();
 
-          case 9:
-            _context.next = 11;
-            return run("".concat(GIT_COMMIT, " -m \"v").concat(commitMsg, "\" -n"));
+          case 10:
+            _context.next = 12;
+            return run("".concat(GIT_COMMIT, " -m \"").concat(commitMsg, "\""));
 
-          case 11:
-            _context.next = 13;
+          case 12:
+            _context.next = 14;
             return run(GIT_PUSH);
 
-          case 13:
-            timeLog('推送代码至git仓库', 'end');
+          case 14:
+            timeLog('已推送代码至git仓库', 'end');
             return _context.abrupt("return", true);
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }

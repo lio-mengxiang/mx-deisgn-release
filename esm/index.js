@@ -1,10 +1,5 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _asyncToGenerator from "@babel/runtime/helpers/esm/asyncToGenerator";
 import _regeneratorRuntime from "@babel/runtime/regenerator";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 /*
  * 部署函数，提供有如下功能
@@ -25,7 +20,7 @@ import { updateVersion, addTag, gitPush, setChangelog, publishNpm, build } from 
 import { compose, getOriginPackageJson } from './config/functions';
 
 var getNextVersion = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(next, otherOptions) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(next) {
     var nextVersion, originPackageJson;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -37,11 +32,11 @@ var getNextVersion = /*#__PURE__*/function () {
           case 2:
             nextVersion = _context.sent;
             originPackageJson = getOriginPackageJson();
-            next(_objectSpread(_objectSpread({}, otherOptions), {}, {
+            next({
               nextVersion,
               originVersion: originPackageJson.version,
               originPackageJson
-            }));
+            });
 
           case 5:
           case "end":
@@ -51,7 +46,7 @@ var getNextVersion = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function getNextVersion(_x, _x2) {
+  return function getNextVersion(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -59,12 +54,12 @@ var getNextVersion = /*#__PURE__*/function () {
 var getReleaseFns = {
   [updateVersion]: function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(next, otherOptions) {
-      var backNextVersion;
+      var backVersionFn;
       return _regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              if (!(otherOptions !== null && otherOptions !== void 0 && otherOptions.nextVersion)) {
+              if (otherOptions !== null && otherOptions !== void 0 && otherOptions.nextVersion) {
                 _context2.next = 2;
                 break;
               }
@@ -76,9 +71,9 @@ var getReleaseFns = {
               return _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson);
 
             case 4:
-              backNextVersion = _context2.sent;
+              backVersionFn = _context2.sent;
               next({
-                backNextVersion
+                backVersionFn
               });
 
             case 6:
@@ -89,13 +84,14 @@ var getReleaseFns = {
       }, _callee2);
     }));
 
-    return function (_x3, _x4) {
+    return function (_x2, _x3) {
       return _ref2.apply(this, arguments);
     };
   }(),
   [gitPush]: function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee3(next, otherOptions) {
-      var pushResult;
+      var pushResult, _otherOptions$backVer;
+
       return _regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -111,7 +107,7 @@ var getReleaseFns = {
                 break;
               }
 
-              return _context3.abrupt("return", otherOptions.backVersionFn());
+              return _context3.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : (_otherOptions$backVer = otherOptions.backVersionFn) === null || _otherOptions$backVer === void 0 ? void 0 : _otherOptions$backVer.call(otherOptions));
 
             case 5:
               next();
@@ -124,7 +120,7 @@ var getReleaseFns = {
       }, _callee3);
     }));
 
-    return function (_x5, _x6) {
+    return function (_x4, _x5) {
       return _ref3.apply(this, arguments);
     };
   }(),
@@ -149,7 +145,7 @@ var getReleaseFns = {
 
               backChangelog();
               _context4.next = 8;
-              return otherOptions.backVersionFn();
+              return otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn();
 
             case 8:
               return _context4.abrupt("return", _context4.sent);
@@ -167,7 +163,7 @@ var getReleaseFns = {
       }, _callee4);
     }));
 
-    return function (_x7, _x8) {
+    return function (_x6, _x7) {
       return _ref4.apply(this, arguments);
     };
   }(),
@@ -203,7 +199,7 @@ var getReleaseFns = {
       }, _callee5);
     }));
 
-    return function (_x9, _x10) {
+    return function (_x8, _x9) {
       return _ref5.apply(this, arguments);
     };
   }(),
@@ -239,7 +235,7 @@ var getReleaseFns = {
       }, _callee6);
     }));
 
-    return function (_x11, _x12) {
+    return function (_x10, _x11) {
       return _ref6.apply(this, arguments);
     };
   }(),
@@ -275,7 +271,7 @@ var getReleaseFns = {
       }, _callee7);
     }));
 
-    return function (_x13, _x14) {
+    return function (_x12, _x13) {
       return _ref7.apply(this, arguments);
     };
   }()

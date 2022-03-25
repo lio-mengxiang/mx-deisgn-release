@@ -56,7 +56,9 @@ export function compose(middleware) {
   function dispatch(index, otherOptions) {
     if (index == middleware.length) return;
     var currMiddleware = middleware[index];
-    return currMiddleware(addOptions => dispatch(++index, _objectSpread(_objectSpread({}, otherOptions), addOptions)));
+    return currMiddleware(addOptions => {
+      dispatch(++index, _objectSpread(_objectSpread({}, otherOptions), addOptions));
+    }, otherOptions);
   }
 
   dispatch(0, otherOptions);

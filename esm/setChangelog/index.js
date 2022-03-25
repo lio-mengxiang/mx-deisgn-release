@@ -6,7 +6,7 @@ import { CHANGELOG_NAME } from "../config/constans";
 export var getOldLog = () => {
   var logPath = getProjectPath(CHANGELOG_NAME);
 
-  if (existsSync(logPath)) {
+  if (!existsSync(logPath)) {
     fs.writeFileSync(logPath, "");
   }
 

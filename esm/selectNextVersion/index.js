@@ -85,7 +85,7 @@ function _updateVersion2() {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            timeLog('修改package.json版本号', 'start');
+            timeLog('开始修改package.json版本号', 'start');
             fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(_objectSpread(_objectSpread({}, originPackageJson), {}, {
               version: nextVersion
             })));
@@ -93,7 +93,7 @@ function _updateVersion2() {
             return run('npx prettier package.json --write');
 
           case 4:
-            timeLog('修改package.json版本号', 'end');
+            timeLog('已经完成修改package.json版本号', 'end');
             return _context3.abrupt("return", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
               return _regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
