@@ -10,7 +10,7 @@ import semverInc from 'semver/functions/inc';
 import { currentVersion } from '../config/constans';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import { getProjectPath, run, timeLog } from '../config/functions';
+import { getProjectPath, timeLog } from '../config/functions';
 /**
  * 列出所有下一个版本的列表
  * @return {*}  {({ [key in ReleaseType]: string | null })}
@@ -88,23 +88,17 @@ function _updateVersion2() {
             timeLog('开始修改package.json版本号', 'start');
             fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(_objectSpread(_objectSpread({}, originPackageJson), {}, {
               version: nextVersion
-            })));
-            _context3.next = 4;
-            return run('npx prettier package.json --write');
-
-          case 4:
+            }), null, 2));
             timeLog('已经完成修改package.json版本号', 'end');
             return _context3.abrupt("return", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
               return _regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(originPackageJson));
+                      fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(originPackageJson, null, 2));
                       console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)');
-                      _context2.next = 4;
-                      return run('npx prettier package.json --write');
 
-                    case 4:
+                    case 2:
                     case "end":
                       return _context2.stop();
                   }
@@ -112,7 +106,7 @@ function _updateVersion2() {
               }, _callee2);
             })));
 
-          case 6:
+          case 4:
           case "end":
             return _context3.stop();
         }

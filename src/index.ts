@@ -91,5 +91,5 @@ async function defaultMain() {
   compose(middle);
 }
 
-export { gitPush, setChangelog, build, publishNpm, addTag };
+export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, compose };
 export default defaultMain;

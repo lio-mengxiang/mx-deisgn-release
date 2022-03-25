@@ -28,7 +28,7 @@ function _gitPush2() {
 
           case 2:
             commitMsg = _context.sent;
-            isMath = /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(commitMsg);
+            isMath = /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:\s.+/.test(commitMsg);
 
             if (isMath) {
               _context.next = 6;
