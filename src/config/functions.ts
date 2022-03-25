@@ -8,7 +8,7 @@ const exec = util.promisify(child_process.exec);
 
 export const run = async (command: string) => {
   console.log(chalk.green(command));
-  await exec(command);
+  await exec(command, { cwd: process.cwd() });
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
@@ -52,4 +52,4 @@ export const getOriginPackageJson = (): Record<string, any> => {
 export const basicCatchError = (err: Error) => {
   console.log(chalk.red(err));
   return false;
-}
+};
