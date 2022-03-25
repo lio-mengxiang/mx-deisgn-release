@@ -13,7 +13,7 @@ import { getOldLog, _setChangelog } from './setChangelog';
 import { _build } from './build';
 import { _publishNpm } from './publishNpm';
 import { _addTag } from './addTag';
-import { updateVersion, addTag, gitPush, setChangelog, publishNpm, build } from './config/constans';
+import { } from './config/constans';
 import { compose, getOriginPackageJson, basicCatchError } from './config/functions';
 
 const getNextVersion = async (next) => {
@@ -26,69 +26,66 @@ const getNextVersion = async (next) => {
   });
 };
 
-const getReleaseFns = {
-  [updateVersion]: async (next, otherOptions) => {
-    if (!otherOptions?.nextVersion) {
-      throw new Error('请传入package.json新版本号');
-    }
-    const backVersionFn = await _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
-      basicCatchError,
-    );
-    next({ backVersionFn });
-  },
-  [gitPush]: async (next, otherOptions) => {
-    const pushResult = await _gitPush().catch(basicCatchError);
-    if (!pushResult) {
-      otherOptions?.backVersionFn?.();
-      process.exit(1);
-    }
-    next();
-  },
-  [setChangelog]: async (next, otherOptions) => {
-    const backChangelog = getOldLog();
-    const setLogResult = await _setChangelog().catch(basicCatchError);
-    if (!setLogResult) {
-      backChangelog();
-      await otherOptions?.backVersionFn();
-      process.exit(1);
-    }
-    next({ backChangelog });
-  },
-  [build]: async (next, otherOptions) => {
-    const buildResult = await _build().catch(basicCatchError);
-    if (!buildResult) {
-      await otherOptions?.backVersionFn();
-      process.exit(1);
-    }
-    next();
-  },
-  [publishNpm]: async (next) => {
-    const publishResult = await _publishNpm().catch(basicCatchError);
-    if (!publishResult) {
-      process.exit(1);
-    }
-    next();
-  },
-  [addTag]: async (next, otherOptions) => {
-    const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
-    if (!addTagResult) {
-      process.exit(1);
-    }
-    next();
-  },
+const updateVersion = async (next, otherOptions) => {
+  if (!otherOptions?.nextVersion) {
+    throw new Error('请传入package.json新版本号');
+  }
+  const backVersionFn = await _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
+    basicCatchError,
+  );
+  next({ backVersionFn });
 };
 
-const middle = [getNextVersion];
+const gitPush = async (next, otherOptions) => {
+  const pushResult = await _gitPush().catch(basicCatchError);
+  if (!pushResult) {
+    otherOptions?.backVersionFn?.();
+    process.exit(1);
+  }
+  next();
+};
 
-const defaultMiddleware = [updateVersion, gitPush, setChangelog, build, publishNpm, addTag].map(
-  (node) => getReleaseFns[node],
-);
+const setChangelog = async (next, otherOptions) => {
+  const backChangelog = getOldLog();
+  const setLogResult = await _setChangelog().catch(basicCatchError);
+  if (!setLogResult) {
+    backChangelog();
+    await otherOptions?.backVersionFn();
+    process.exit(1);
+  }
+  next({ backChangelog });
+};
 
-middle.push(...defaultMiddleware);
+const build = async (next, otherOptions) => {
+  const buildResult = await _build().catch(basicCatchError);
+  if (!buildResult) {
+    await otherOptions?.backVersionFn();
+    process.exit(1);
+  }
+  next();
+};
+
+const publishNpm = async (next) => {
+  const publishResult = await _publishNpm().catch(basicCatchError);
+  if (!publishResult) {
+    process.exit(1);
+  }
+  next();
+};
+
+const addTag = async (next, otherOptions) => {
+  const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
+  if (!addTagResult) {
+    process.exit(1);
+  }
+  next();
+};
+
+const middle = [getNextVersion, updateVersion, gitPush, setChangelog, build, publishNpm, addTag];
 
 async function defaultMain() {
   compose(middle);
 }
 
-export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, compose };
+export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, updateVersion, compose };
 export default defaultMain;

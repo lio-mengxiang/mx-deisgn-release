@@ -13,7 +13,8 @@ var spinner = ora();
 var execSync = child_process.execSync;
 export var run = command => {
   execSync(command, {
-    cwd: process.cwd()
+    cwd: process.cwd(),
+    stdio: 'ignore'
   });
 };
 export var timeLog = (logInfo, type) => {

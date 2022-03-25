@@ -12,9 +12,3 @@ export const currentVersion: string = pkg.version;
 export const CHANGELOG_NAME = "CHANGELOG.md";
 
 
-export const updateVersion = '_updateVersion';
-export const gitPush = '_gitPush';
-export const setChangelog = 'setChangelog';
-export const build = '_build';
-export const publishNpm = '_publishNpm'
-export const addTag = '_addTag'
