@@ -8,7 +8,12 @@ const spinner = ora()
 const execSync = child_process.execSync;
 
 export const run = (command: string) => {
-  execSync(command, { cwd: process.cwd() });
+  try {
+    execSync(command, { cwd: process.cwd() });
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {

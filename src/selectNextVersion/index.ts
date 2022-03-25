@@ -2,7 +2,7 @@ import semverInc from 'semver/functions/inc';
 import { ReleaseType } from 'semver';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import { getOriginPackageJson, getProjectPath, run, timeLog } from '../config/functions';
+import { getOriginPackageJson, getProjectPath, timeLog } from '../config/functions';
 
 const currentVersion = getOriginPackageJson()?.version;
 /**
