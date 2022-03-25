@@ -16,14 +16,11 @@ function _publishNpm2() {
         switch (_context.prev = _context.next) {
           case 0:
             timeLog("发布", "start");
-            _context.next = 3;
-            return run("npm publish --access=public");
-
-          case 3:
+            run("npm publish --access=public");
             timeLog("发布", "end");
             return _context.abrupt("return", true);
 
-          case 5:
+          case 4:
           case "end":
             return _context.stop();
         }

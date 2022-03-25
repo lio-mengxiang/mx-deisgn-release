@@ -1,5 +1,4 @@
 import child_process from 'child_process';
-import util from 'util';
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
@@ -9,7 +8,7 @@ const spinner = ora()
 const execSync = child_process.execSync;
 
 export const run = (command: string) => {
-  execSync(command, { cwd: process.cwd() });
+  execSync(command, { cwd: process.cwd(), stdio: 'ignore' });
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {

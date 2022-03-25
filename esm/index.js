@@ -178,21 +178,20 @@ var getReleaseFns = {
               buildResult = _context5.sent;
 
               if (buildResult) {
-                _context5.next = 8;
+                _context5.next = 7;
                 break;
               }
 
-              otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
-              _context5.next = 7;
+              _context5.next = 6;
               return otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn();
 
-            case 7:
+            case 6:
               process.exit(1);
 
-            case 8:
+            case 7:
               next();
 
-            case 9:
+            case 8:
             case "end":
               return _context5.stop();
           }
@@ -293,5 +292,5 @@ function _defaultMain() {
   return _defaultMain.apply(this, arguments);
 }
 
-export { gitPush, setChangelog, build, publishNpm, addTag };
+export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, compose };
 export default defaultMain;

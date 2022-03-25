@@ -39,22 +39,11 @@ function _gitPush2() {
 
           case 6:
             timeLog('准备推送代码至git仓库', 'start');
-            _context.next = 9;
-            return run("".concat(GIT_ADD, " ."));
-
-          case 9:
-            _context.next = 11;
-            return run("".concat(GIT_COMMIT, " -m \"").concat(commitMsg, "\""));
-
-          case 11:
-            _context.next = 13;
-            return run(GIT_PUSH);
-
-          case 13:
+            run("".concat(GIT_ADD, " . && ").concat(GIT_COMMIT, " -m \"").concat(commitMsg, "\" && ").concat(GIT_PUSH));
             timeLog('已推送代码至git仓库', 'end');
             return _context.abrupt("return", true);
 
-          case 15:
+          case 10:
           case "end":
             return _context.stop();
         }
