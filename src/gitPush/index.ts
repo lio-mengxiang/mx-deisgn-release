@@ -13,7 +13,7 @@ import {
 export async function _gitPush() {
   const commitMsg = await checkCommit();
   const isMath =
-    /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(
+    /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:\s.+/.test(
       commitMsg
     );
   if (!isMath) {

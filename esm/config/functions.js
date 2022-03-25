@@ -39,9 +39,9 @@ export var run = /*#__PURE__*/function () {
 }();
 export var timeLog = (logInfo, type) => {
   if (type === 'start') {
-    spinner.start("".concat(chalk.yellow("task start(\u5F00\u59CB\u4EFB\u52A1): ".concat(logInfo))));
+    spinner.start("".concat(chalk.magentaBright("task start(\u5F00\u59CB\u4EFB\u52A1): ".concat(logInfo))));
   } else {
-    spinner.succeed("".concat(chalk.yellow("task end(\u4EFB\u52A1\u7ED3\u675F): ".concat(logInfo))));
+    spinner.succeed("".concat(chalk.green("task end(\u4EFB\u52A1\u7ED3\u675F): ".concat(logInfo))));
   }
 }; // 获取项目文件
 

@@ -176,24 +176,23 @@ var getReleaseFns = {
 
             case 2:
               buildResult = _context5.sent;
-              console.log('buildResult: ', buildResult);
 
               if (buildResult) {
-                _context5.next = 9;
+                _context5.next = 8;
                 break;
               }
 
               otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
-              _context5.next = 8;
+              _context5.next = 7;
               return otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn();
 
-            case 8:
+            case 7:
               process.exit(1);
 
-            case 9:
+            case 8:
               next();
 
-            case 10:
+            case 9:
             case "end":
               return _context5.stop();
           }
