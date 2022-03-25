@@ -12,15 +12,14 @@ import {
  */
 export async function _gitPush() {
   timeLog('准备推送代码至git仓库', 'start');
-  await run(`${GIT_ADD} .`);
   const commitMsg = await checkCommit();
+  await run(`${GIT_ADD} .`);
   const isMath =
     /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(
       commitMsg
     );
   if (!isMath) {
-    console.log(COMMIT_REEOR_MESSAGE);
-    throw new Error();
+    throw new Error(COMMIT_REEOR_MESSAGE);
   }
   await run(`${GIT_COMMIT} -m "${commitMsg}"`);
   await run(GIT_PUSH);
