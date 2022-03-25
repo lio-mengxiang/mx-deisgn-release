@@ -5,7 +5,7 @@ import { run, timeLog } from "../config/functions";
  */
 export async function _publishNpm() {
   timeLog("发布", "start");
-  await run("npm publish --access=public");
+  run("npm publish --access=public");
   timeLog("发布", "end");
   return true;
 }

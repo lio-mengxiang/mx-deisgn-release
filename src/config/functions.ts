@@ -6,10 +6,10 @@ import fs from 'fs';
 import ora from 'ora';
 
 const spinner = ora()
-const exec = util.promisify(child_process.exec);
+const execSync = child_process.execSync;
 
-export const run = async (command: string) => {
-  await exec(command, { cwd: process.cwd() });
+export const run = (command: string) => {
+  execSync(command, { cwd: process.cwd() });
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {

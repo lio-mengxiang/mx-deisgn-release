@@ -5,8 +5,8 @@ import { run, timeLog } from "../config/functions";
  */
 export async function _addTag(nextVersion: string) {
   timeLog("打tag并推送至git", "start");
-  await run(`git tag v${nextVersion}`);
-  await run(`git push origin tag v${nextVersion}`);
+  run(`git tag v${nextVersion}`);
+  run(`git push origin tag v${nextVersion}`);
   timeLog("打tag并推送至git", "end");
   return true;
 }

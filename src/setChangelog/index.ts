@@ -18,7 +18,7 @@ export const getOldLog = () => {
  */
 export async function _setChangelog() {
   timeLog("生成CHANGELOG.md", "start");
-  await run(`conventional-changelog -p angular -i ${CHANGELOG_NAME} -s`);
+  run(`conventional-changelog -p angular -i ${CHANGELOG_NAME} -s`);
   timeLog("生成CHANGELOG.md", "end");
   return true;
 }

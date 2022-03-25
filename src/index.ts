@@ -31,7 +31,7 @@ const getReleaseFns = {
     if (!otherOptions?.nextVersion) {
       throw new Error('请传入package.json新版本号');
     }
-    const backVersionFn = await _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
+    const backVersionFn = _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
       basicCatchError,
     );
     next({ backVersionFn });
@@ -57,7 +57,6 @@ const getReleaseFns = {
   [build]: async (next, otherOptions) => {
     const buildResult = await _build().catch(basicCatchError);
     if (!buildResult) {
-      otherOptions?.backChangelog();
       await otherOptions?.backVersionFn();
       process.exit(1);
     }
