@@ -80,11 +80,7 @@ const getReleaseFns = {
   },
   [addTag]: async (next, otherOptions) => {
     console.log(44);
-    const tagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
-    if (!tagResult) {
-      otherOptions?.backChangelog();
-      return otherOptions?.backVersionFn();
-    }
+    await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
     next();
   },
 };
