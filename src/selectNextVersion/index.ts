@@ -50,16 +50,14 @@ export async function _updateVersion(nextVersion: string, originPackageJson) {
   timeLog('开始修改package.json版本号', 'start');
   fs.writeFileSync(
     getProjectPath('package.json'),
-    JSON.stringify({ ...originPackageJson, version: nextVersion })
+    JSON.stringify({ ...originPackageJson, version: nextVersion }, null, 2)
   );
-  await run('npx prettier package.json --write');
   timeLog('已经完成修改package.json版本号', 'end');
   return async () => {
     fs.writeFileSync(
       getProjectPath('package.json'),
-      JSON.stringify(originPackageJson)
+      JSON.stringify(originPackageJson, null, 2)
     );
     console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)')
-    await run('npx prettier package.json --write');
   };
 }
