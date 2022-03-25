@@ -39,7 +39,8 @@ const getReleaseFns = {
   [gitPush]: async (next, otherOptions) => {
     const pushResult = await _gitPush().catch(basicCatchError);
     if (!pushResult) {
-      return otherOptions?.backVersionFn?.();
+      otherOptions?.backVersionFn?.();
+      process.exit(1);
     }
     next();
   },
@@ -48,7 +49,8 @@ const getReleaseFns = {
     const setLogResult = await _setChangelog().catch(basicCatchError);
     if (!setLogResult) {
       backChangelog();
-      return await otherOptions?.backVersionFn();
+      await otherOptions?.backVersionFn();
+      process.exit(1);
     }
     next({ backChangelog });
   },
@@ -56,21 +58,22 @@ const getReleaseFns = {
     const buildResult = await _build().catch(basicCatchError);
     if (!buildResult) {
       otherOptions?.backChangelog();
-      return otherOptions?.backVersionFn();
+      await otherOptions?.backVersionFn();
+      process.exit(1);
     }
     next();
   },
-  [publishNpm]: async (next, otherOptions) => {
+  [publishNpm]: async (next) => {
     const publishResult = await _publishNpm().catch(basicCatchError);
     if (!publishResult) {
-      return;
+      process.exit(1);
     }
     next();
   },
   [addTag]: async (next, otherOptions) => {
     const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
     if (!addTagResult) {
-      return;
+      process.exit(1);
     }
     next();
   },

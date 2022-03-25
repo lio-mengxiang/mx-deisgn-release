@@ -288,11 +288,7 @@ function _defaultMain() {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            try {
-              compose(middle);
-            } catch (error) {
-              console.log('💣 发布失败，失败原因：', error);
-            }
+            compose(middle);
 
           case 1:
           case "end":

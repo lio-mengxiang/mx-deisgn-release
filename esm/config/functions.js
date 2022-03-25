@@ -11,6 +11,8 @@ import util from 'util';
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
+import ora from 'ora';
+var spinner = ora();
 var exec = util.promisify(child_process.exec);
 export var run = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(command) {
@@ -18,13 +20,12 @@ export var run = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log(chalk.green(command));
-            _context.next = 3;
+            _context.next = 2;
             return exec(command, {
               cwd: process.cwd()
             });
 
-          case 3:
+          case 2:
           case "end":
             return _context.stop();
         }
@@ -37,15 +38,11 @@ export var run = /*#__PURE__*/function () {
   };
 }();
 export var timeLog = (logInfo, type) => {
-  var info = '';
-
   if (type === 'start') {
-    info = "=> start task\uFF1A".concat(logInfo);
+    spinner.start("".concat(chalk.yellow("task start(\u5F00\u59CB\u4EFB\u52A1): ".concat(logInfo))));
   } else {
-    info = "\u2728 end task\uFF1A".concat(logInfo);
+    spinner.succeed("".concat(chalk.yellow("task end(\u4EFB\u52A1\u7ED3\u675F): ".concat(logInfo))));
   }
-
-  console.log("[".concat(new Date().toLocaleString(), "] ").concat(info));
 }; // 获取项目文件
 
 export var getProjectPath = function getProjectPath() {
@@ -80,6 +77,6 @@ export var getOriginPackageJson = () => {
  */
 
 export var basicCatchError = err => {
-  console.log(chalk.red(err));
+  console.log("\r\n ".concat(chalk.red(err)));
   return false;
 };

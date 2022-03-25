@@ -23,24 +23,24 @@ function _gitPush2() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            timeLog('准备推送代码至git仓库', 'start');
-            _context.next = 3;
+            _context.next = 2;
             return checkCommit();
 
-          case 3:
+          case 2:
             commitMsg = _context.sent;
-            _context.next = 6;
-            return run("".concat(GIT_ADD, " ."));
-
-          case 6:
             isMath = /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(commitMsg);
 
             if (isMath) {
-              _context.next = 9;
+              _context.next = 6;
               break;
             }
 
             throw new Error(COMMIT_REEOR_MESSAGE);
+
+          case 6:
+            timeLog('准备推送代码至git仓库', 'start');
+            _context.next = 9;
+            return run("".concat(GIT_ADD, " ."));
 
           case 9:
             _context.next = 11;
