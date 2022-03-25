@@ -56,7 +56,6 @@ const getReleaseFns = {
   },
   [build]: async (next, otherOptions) => {
     const buildResult = await _build().catch(basicCatchError);
-    console.log('buildResult: ', buildResult);
     if (!buildResult) {
       otherOptions?.backChangelog();
       await otherOptions?.backVersionFn();
