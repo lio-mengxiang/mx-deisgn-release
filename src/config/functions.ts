@@ -13,9 +13,9 @@ export const run = (command: string) => {
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
   if (type === 'start') {
-    spinner.start( `${chalk.cyanBright(`task start(开始任务): ${logInfo}`)}`);
+    spinner.start( `${chalk.cyanBright(`task start(开始任务): ${logInfo}`)} \r\n`);
   } else {
-    spinner.succeed(`${chalk.green(`task end(任务结束): ${logInfo}`)}`);
+    spinner.succeed(`${chalk.green(`task end(任务结束): ${logInfo}`)} \r\n`);
   }
 
 };
