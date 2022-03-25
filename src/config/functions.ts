@@ -13,7 +13,6 @@ export const run = (command: string) => {
   } catch (error) {
     console.log(error)
   }
-
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
