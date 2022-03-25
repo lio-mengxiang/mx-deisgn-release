@@ -215,20 +215,21 @@ var getReleaseFns = {
 
             case 2:
               publishResult = _context6.sent;
+              console.log(22, publishResult);
 
               if (publishResult) {
-                _context6.next = 6;
+                _context6.next = 7;
                 break;
               }
 
               otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
               return _context6.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn());
 
-            case 6:
+            case 7:
               console.log(33);
               next();
 
-            case 8:
+            case 9:
             case "end":
               return _context6.stop();
           }
