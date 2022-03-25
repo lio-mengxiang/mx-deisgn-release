@@ -1,3 +1,12 @@
+## [0.0.24](https://github.com/lio-mengxiang/mx-deisgn-release/compare/v0.0.22...v0.0.24) (2022-03-25)
+
+
+### Features
+
+* t ([0ab0b4e](https://github.com/lio-mengxiang/mx-deisgn-release/commit/0ab0b4e9b7da3d3f155f58647e8916dc181822b6))
+
+
+
 ## [0.0.22](https://github.com/lio-mengxiang/mx-deisgn-release/compare/v0.0.11...v0.0.22) (2022-03-25)
 
 

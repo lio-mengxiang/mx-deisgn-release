@@ -102,17 +102,14 @@ var getReleaseFns = {
             case 2:
               pushResult = _context3.sent;
 
-              if (pushResult) {
-                _context3.next = 5;
-                break;
+              if (!pushResult) {
+                otherOptions === null || otherOptions === void 0 ? void 0 : (_otherOptions$backVer = otherOptions.backVersionFn) === null || _otherOptions$backVer === void 0 ? void 0 : _otherOptions$backVer.call(otherOptions);
+                process.exit(1);
               }
 
-              return _context3.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : (_otherOptions$backVer = otherOptions.backVersionFn) === null || _otherOptions$backVer === void 0 ? void 0 : _otherOptions$backVer.call(otherOptions));
-
-            case 5:
               next();
 
-            case 6:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -148,7 +145,7 @@ var getReleaseFns = {
               return otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn();
 
             case 8:
-              return _context4.abrupt("return", _context4.sent);
+              process.exit(1);
 
             case 9:
               next({
@@ -179,19 +176,24 @@ var getReleaseFns = {
 
             case 2:
               buildResult = _context5.sent;
+              console.log('buildResult: ', buildResult);
 
               if (buildResult) {
-                _context5.next = 6;
+                _context5.next = 9;
                 break;
               }
 
               otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
-              return _context5.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn());
+              _context5.next = 8;
+              return otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn();
 
-            case 6:
+            case 8:
+              process.exit(1);
+
+            case 9:
               next();
 
-            case 7:
+            case 10:
             case "end":
               return _context5.stop();
           }
@@ -204,7 +206,7 @@ var getReleaseFns = {
     };
   }(),
   [publishNpm]: function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6(next, otherOptions) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6(next) {
       var publishResult;
       return _regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
@@ -216,17 +218,13 @@ var getReleaseFns = {
             case 2:
               publishResult = _context6.sent;
 
-              if (publishResult) {
-                _context6.next = 5;
-                break;
+              if (!publishResult) {
+                process.exit(1);
               }
 
-              return _context6.abrupt("return");
-
-            case 5:
               next();
 
-            case 6:
+            case 5:
             case "end":
               return _context6.stop();
           }
@@ -234,7 +232,7 @@ var getReleaseFns = {
       }, _callee6);
     }));
 
-    return function (_x10, _x11) {
+    return function (_x10) {
       return _ref6.apply(this, arguments);
     };
   }(),
@@ -251,17 +249,13 @@ var getReleaseFns = {
             case 2:
               addTagResult = _context7.sent;
 
-              if (addTagResult) {
-                _context7.next = 5;
-                break;
+              if (!addTagResult) {
+                process.exit(1);
               }
 
-              return _context7.abrupt("return");
-
-            case 5:
               next();
 
-            case 6:
+            case 5:
             case "end":
               return _context7.stop();
           }
@@ -269,7 +263,7 @@ var getReleaseFns = {
       }, _callee7);
     }));
 
-    return function (_x12, _x13) {
+    return function (_x11, _x12) {
       return _ref7.apply(this, arguments);
     };
   }()
