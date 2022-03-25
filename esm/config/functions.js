@@ -71,3 +71,11 @@ export var getOriginPackageJson = () => {
   var packageJson = JSON.parse(fs.readFileSync(getProjectPath('package.json'), 'utf-8'));
   return packageJson;
 };
+/**
+ * 工具函数，用来捕获并打印错误，返回false
+ */
+
+export var basicCatchError = err => {
+  console.log(chalk.red(err));
+  return false;
+};

@@ -17,7 +17,7 @@ import { _build } from './build';
 import { _publishNpm } from './publishNpm';
 import { _addTag } from './addTag';
 import { updateVersion, addTag, gitPush, setChangelog, publishNpm, build } from './config/constans';
-import { compose, getOriginPackageJson } from './config/functions';
+import { compose, getOriginPackageJson, basicCatchError } from './config/functions';
 
 var getNextVersion = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(next) {
@@ -68,7 +68,7 @@ var getReleaseFns = {
 
             case 2:
               _context2.next = 4;
-              return _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson);
+              return _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(basicCatchError);
 
             case 4:
               backVersionFn = _context2.sent;
@@ -97,7 +97,7 @@ var getReleaseFns = {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return _gitPush().catch(() => false);
+              return _gitPush().catch(basicCatchError);
 
             case 2:
               pushResult = _context3.sent;
@@ -133,7 +133,7 @@ var getReleaseFns = {
             case 0:
               backChangelog = getOldLog();
               _context4.next = 3;
-              return _setChangelog().catch(() => false);
+              return _setChangelog().catch(basicCatchError);
 
             case 3:
               setLogResult = _context4.sent;

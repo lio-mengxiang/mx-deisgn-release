@@ -62,7 +62,7 @@ const getReleaseFns = {
     next({ backChangelog });
   },
   [build]: async (next, otherOptions) => {
-    const buildResult = await _build().catch(() => false);
+    const buildResult = await _build().catch(basicCatchError);
     if (!buildResult) {
       otherOptions?.backChangelog();
       return otherOptions?.backVersionFn();
@@ -70,17 +70,17 @@ const getReleaseFns = {
     next();
   },
   [publishNpm]: async (next, otherOptions) => {
-    const publishResult = await _publishNpm().catch(() => false);
+    const publishResult = await _publishNpm().catch(basicCatchError);
     if (!publishResult) {
       otherOptions?.backChangelog();
       return otherOptions?.backVersionFn();
     }
+    console.log(33);
     next();
   },
   [addTag]: async (next, otherOptions) => {
-    const tagResult = await _addTag(otherOptions?.nextVersion).catch(
-      () => false
-    );
+    console.log(44);
+    const tagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
     if (!tagResult) {
       otherOptions?.backChangelog();
       return otherOptions?.backVersionFn();

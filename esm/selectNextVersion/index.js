@@ -100,10 +100,11 @@ function _updateVersion2() {
                   switch (_context2.prev = _context2.next) {
                     case 0:
                       fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(originPackageJson));
-                      _context2.next = 3;
+                      console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)');
+                      _context2.next = 4;
                       return run('npx prettier package.json --write');
 
-                    case 3:
+                    case 4:
                     case "end":
                       return _context2.stop();
                   }
