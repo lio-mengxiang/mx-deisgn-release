@@ -175,7 +175,7 @@ var getReleaseFns = {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return _build().catch(() => false);
+              return _build().catch(basicCatchError);
 
             case 2:
               buildResult = _context5.sent;
@@ -211,7 +211,7 @@ var getReleaseFns = {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.next = 2;
-              return _publishNpm().catch(() => false);
+              return _publishNpm().catch(basicCatchError);
 
             case 2:
               publishResult = _context6.sent;
@@ -225,9 +225,10 @@ var getReleaseFns = {
               return _context6.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn());
 
             case 6:
+              console.log(33);
               next();
 
-            case 7:
+            case 8:
             case "end":
               return _context6.stop();
           }
@@ -241,29 +242,18 @@ var getReleaseFns = {
   }(),
   [addTag]: function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7(next, otherOptions) {
-      var tagResult;
       return _regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              _context7.next = 2;
-              return _addTag(otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.nextVersion).catch(() => false);
+              console.log(44);
+              _context7.next = 3;
+              return _addTag(otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.nextVersion).catch(basicCatchError);
 
-            case 2:
-              tagResult = _context7.sent;
-
-              if (tagResult) {
-                _context7.next = 6;
-                break;
-              }
-
-              otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
-              return _context7.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn());
-
-            case 6:
+            case 3:
               next();
 
-            case 7:
+            case 4:
             case "end":
               return _context7.stop();
           }

@@ -20,7 +20,9 @@ export var run = /*#__PURE__*/function () {
           case 0:
             console.log(chalk.green(command));
             _context.next = 3;
-            return exec(command);
+            return exec(command, {
+              cwd: process.cwd()
+            });
 
           case 3:
           case "end":

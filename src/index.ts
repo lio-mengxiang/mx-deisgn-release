@@ -71,6 +71,7 @@ const getReleaseFns = {
   },
   [publishNpm]: async (next, otherOptions) => {
     const publishResult = await _publishNpm().catch(basicCatchError);
+    console.log(22, publishResult);
     if (!publishResult) {
       otherOptions?.backChangelog();
       return otherOptions?.backVersionFn();
