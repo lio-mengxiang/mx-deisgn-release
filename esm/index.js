@@ -218,18 +218,17 @@ var getReleaseFns = {
               console.log(22, publishResult);
 
               if (publishResult) {
-                _context6.next = 7;
+                _context6.next = 6;
                 break;
               }
 
-              otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backChangelog();
-              return _context6.abrupt("return", otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.backVersionFn());
+              return _context6.abrupt("return");
 
-            case 7:
+            case 6:
               console.log(33);
               next();
 
-            case 9:
+            case 8:
             case "end":
               return _context6.stop();
           }
@@ -243,6 +242,7 @@ var getReleaseFns = {
   }(),
   [addTag]: function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7(next, otherOptions) {
+      var addTagResult;
       return _regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
@@ -252,9 +252,19 @@ var getReleaseFns = {
               return _addTag(otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.nextVersion).catch(basicCatchError);
 
             case 3:
+              addTagResult = _context7.sent;
+
+              if (addTagResult) {
+                _context7.next = 6;
+                break;
+              }
+
+              return _context7.abrupt("return");
+
+            case 6:
               next();
 
-            case 4:
+            case 7:
             case "end":
               return _context7.stop();
           }

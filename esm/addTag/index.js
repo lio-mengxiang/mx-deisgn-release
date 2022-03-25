@@ -25,8 +25,9 @@ function _addTag2() {
 
           case 5:
             timeLog("打tag并推送至git", "end");
+            return _context.abrupt("return", true);
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }

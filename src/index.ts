@@ -7,7 +7,6 @@
  * 生成 CHANGELOG
  * 打 tag 并推送至 git
  */
-
 import { _updateVersion, _selectNextVersion } from './selectNextVersion';
 import { _gitPush } from './gitPush';
 import { getOldLog, _setChangelog } from './setChangelog';
@@ -71,15 +70,12 @@ const getReleaseFns = {
   },
   [publishNpm]: async (next, otherOptions) => {
     const publishResult = await _publishNpm().catch(basicCatchError);
-    console.log(22, publishResult);
     if (!publishResult) {
       return;
     }
-    console.log(33);
     next();
   },
   [addTag]: async (next, otherOptions) => {
-    console.log(44);
     const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
     if(!addTagResult){
       return;

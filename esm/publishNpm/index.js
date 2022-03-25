@@ -21,8 +21,9 @@ function _publishNpm2() {
 
           case 3:
             timeLog("发布", "end");
+            return _context.abrupt("return", true);
 
-          case 4:
+          case 5:
           case "end":
             return _context.stop();
         }
