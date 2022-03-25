@@ -14,10 +14,11 @@ export const run = async (command: string) => {
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
   let info = '';
   if (type === 'start') {
-    info = `=> start task：${logInfo}`;
+    info = ` \r\n ${chalk.yellow(`task start(开始任务): ${logInfo}`)}  \r\n wait...`;
   } else {
-    info = `✨ end task：${logInfo}`;
+    info = `${chalk.yellow(`task end(任务结束): ${logInfo}`)}`;
   }
+
   console.log(`[${new Date().toLocaleString()}] ${info}`);
 };
 

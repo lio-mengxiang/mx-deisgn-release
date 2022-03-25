@@ -215,20 +215,18 @@ var getReleaseFns = {
 
             case 2:
               publishResult = _context6.sent;
-              console.log(22, publishResult);
 
               if (publishResult) {
-                _context6.next = 6;
+                _context6.next = 5;
                 break;
               }
 
               return _context6.abrupt("return");
 
-            case 6:
-              console.log(33);
+            case 5:
               next();
 
-            case 8:
+            case 6:
             case "end":
               return _context6.stop();
           }
@@ -247,24 +245,23 @@ var getReleaseFns = {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              console.log(44);
-              _context7.next = 3;
+              _context7.next = 2;
               return _addTag(otherOptions === null || otherOptions === void 0 ? void 0 : otherOptions.nextVersion).catch(basicCatchError);
 
-            case 3:
+            case 2:
               addTagResult = _context7.sent;
 
               if (addTagResult) {
-                _context7.next = 6;
+                _context7.next = 5;
                 break;
               }
 
               return _context7.abrupt("return");
 
-            case 6:
+            case 5:
               next();
 
-            case 7:
+            case 6:
             case "end":
               return _context7.stop();
           }

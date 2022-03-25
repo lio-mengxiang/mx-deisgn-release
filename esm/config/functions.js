@@ -58,9 +58,11 @@ export function compose(middleware) {
   function dispatch(index, otherOptions) {
     if (index == middleware.length) return;
     var currMiddleware = middleware[index];
-    return currMiddleware(addOptions => {
+    currMiddleware(addOptions => {
       dispatch(++index, _objectSpread(_objectSpread({}, otherOptions), addOptions));
-    }, otherOptions);
+    }, otherOptions).catch(error => {
+      console.log('💣 发布失败，失败原因：', error);
+    });
   }
 
   dispatch(0, otherOptions);
