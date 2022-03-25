@@ -59,6 +59,7 @@ export async function _updateVersion(nextVersion: string, originPackageJson) {
       getProjectPath('package.json'),
       JSON.stringify(originPackageJson)
     );
+    console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)')
     await run('npx prettier package.json --write');
   };
 }
