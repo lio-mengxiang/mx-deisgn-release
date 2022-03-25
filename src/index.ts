@@ -73,15 +73,17 @@ const getReleaseFns = {
     const publishResult = await _publishNpm().catch(basicCatchError);
     console.log(22, publishResult);
     if (!publishResult) {
-      otherOptions?.backChangelog();
-      return otherOptions?.backVersionFn();
+      return;
     }
     console.log(33);
     next();
   },
   [addTag]: async (next, otherOptions) => {
     console.log(44);
-    await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
+    const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
+    if(!addTagResult){
+      return;
+    }
     next();
   },
 };

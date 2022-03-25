@@ -7,4 +7,5 @@ export async function _publishNpm() {
   timeLog("发布", "start");
   await run("npm publish --access=public");
   timeLog("发布", "end");
+  return true;
 }
