@@ -20,9 +20,7 @@ export async function _gitPush() {
     throw new Error(COMMIT_REEOR_MESSAGE);
   }
   timeLog('准备推送代码至git仓库', 'start');
-  run(`${GIT_ADD} .`);
-  run(`${GIT_COMMIT} -m "${commitMsg}"`);
-  run(GIT_PUSH);
+  run(`${GIT_ADD} . && ${GIT_COMMIT} -m "${commitMsg}" && ${GIT_PUSH}`);
   timeLog('已推送代码至git仓库', 'end');
   return true;
 }
