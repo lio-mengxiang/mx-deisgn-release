@@ -1,6 +1,6 @@
 {
   "name": "@mx-design/release",
-  "version": "0.0.16",
+  "version": "0.0.21",
   "description": "Lightweight release script for Front-end project",
   "keywords": [
     "mx-release",
@@ -31,11 +31,12 @@
   "dependencies": {
     "@mx-design/cli": "1.0.2",
     "chalk": "^4.1.1",
+    "conventional-changelog-cli": "^2.2.2",
     "inquirer": "8.2.0",
+    "ora": "^5.1.0",
     "rimraf": "^3.0.2",
     "semver": "7.3.5",
-    "typescript": "^4.5.4",
-    "conventional-changelog-cli": "^2.2.2"
+    "typescript": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",

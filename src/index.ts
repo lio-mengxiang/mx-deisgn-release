@@ -13,14 +13,7 @@ import { getOldLog, _setChangelog } from './setChangelog';
 import { _build } from './build';
 import { _publishNpm } from './publishNpm';
 import { _addTag } from './addTag';
-import {
-  updateVersion,
-  addTag,
-  gitPush,
-  setChangelog,
-  publishNpm,
-  build,
-} from './config/constans';
+import { updateVersion, addTag, gitPush, setChangelog, publishNpm, build } from './config/constans';
 import { compose, getOriginPackageJson, basicCatchError } from './config/functions';
 
 const getNextVersion = async (next) => {
@@ -38,10 +31,9 @@ const getReleaseFns = {
     if (!otherOptions?.nextVersion) {
       throw new Error('请传入package.json新版本号');
     }
-    const backVersionFn = await _updateVersion(
-      otherOptions.nextVersion,
-      otherOptions.originPackageJson
-    ).catch(basicCatchError);
+    const backVersionFn = await _updateVersion(otherOptions.nextVersion, otherOptions.originPackageJson).catch(
+      basicCatchError,
+    );
     next({ backVersionFn });
   },
   [gitPush]: async (next, otherOptions) => {
@@ -49,7 +41,7 @@ const getReleaseFns = {
     if (!pushResult) {
       return otherOptions?.backVersionFn?.();
     }
-    next()
+    next();
   },
   [setChangelog]: async (next, otherOptions) => {
     const backChangelog = getOldLog();
@@ -77,7 +69,7 @@ const getReleaseFns = {
   },
   [addTag]: async (next, otherOptions) => {
     const addTagResult = await _addTag(otherOptions?.nextVersion).catch(basicCatchError);
-    if(!addTagResult){
+    if (!addTagResult) {
       return;
     }
     next();
@@ -86,23 +78,14 @@ const getReleaseFns = {
 
 const middle = [getNextVersion];
 
-const defaultMiddleware = [
-  updateVersion,
-  gitPush,
-  setChangelog,
-  build,
-  publishNpm,
-  addTag,
-].map((node) => getReleaseFns[node]);
+const defaultMiddleware = [updateVersion, gitPush, setChangelog, build, publishNpm, addTag].map(
+  (node) => getReleaseFns[node],
+);
 
 middle.push(...defaultMiddleware);
 
 async function defaultMain() {
-  try {
-    compose(middle);
-  } catch (error) {
-    console.log('💣 发布失败，失败原因：', error);
-  }
+  compose(middle);
 }
 
 export { gitPush, setChangelog, build, publishNpm, addTag };

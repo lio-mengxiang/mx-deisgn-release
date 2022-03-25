@@ -11,8 +11,8 @@ import {
  * 将代码提交至git
  */
 export async function _gitPush() {
-  timeLog('准备推送代码至git仓库', 'start');
   const commitMsg = await checkCommit();
+  timeLog('准备推送代码至git仓库', 'start');
   await run(`${GIT_ADD} .`);
   const isMath =
     /^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?\:.+/.test(

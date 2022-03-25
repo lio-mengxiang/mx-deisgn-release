@@ -3,23 +3,22 @@ import util from 'util';
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
+import ora from 'ora';
 
+const spinner = ora('Loading...')
 const exec = util.promisify(child_process.exec);
 
 export const run = async (command: string) => {
-  console.log(chalk.green(command));
   await exec(command, { cwd: process.cwd() });
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
-  let info = '';
   if (type === 'start') {
-    info = ` \r\n ${chalk.yellow(`task start(开始任务): ${logInfo}`)}  \r\n wait...`;
+    spinner.start( `${chalk.yellow(`task start(开始任务): ${logInfo}`)}`);
   } else {
-    info = `${chalk.yellow(`task end(任务结束): ${logInfo}`)}`;
+    spinner.succeed(`${chalk.yellow(`task end(任务结束): ${logInfo}`)}`);
   }
 
-  console.log(`[${new Date().toLocaleString()}] ${info}`);
 };
 
 // 获取项目文件
