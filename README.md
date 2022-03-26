@@ -199,7 +199,7 @@ compose([getNextVersion, updateVersion])
 好了源码分析完了，我今年主要是任务是写react pc和移动端组件库，之前写了cli打包和开发的脚手架，文章如下：
 https://juejin.cn/post/7075187294096850951
 
-这个项目也是，想当核心贡献者，直接留言，把github账号说下，第一时间加你进来，多谢点个star哦
+这个项目也是，有兴趣加入核心贡献者，直接留言，把github账号说下，第一时间加你进来，多谢点个star哦
 现在完成了发布脚本，接着就是搭建组件库展示网站了，也是自己写，没有用现成的dumi或者storybook。
 
 
