@@ -38,6 +38,7 @@ const updateVersion = async (next, otherOptions) => {
 
 const gitPush = async (next, otherOptions) => {
   const pushResult = await _gitPush().catch(basicCatchError);
+  console.log('pushResult: ', pushResult);
   if (!pushResult) {
     return otherOptions?.backVersionFn?.();
   }
