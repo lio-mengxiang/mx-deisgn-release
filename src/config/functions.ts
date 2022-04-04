@@ -5,6 +5,7 @@ import fs from 'fs';
 import ora, { Color } from 'ora';
 
 const execSync = child_process.execSync;
+const exec = child_process.exec;
 
 export class DefaultLogger {
   private _spinner: ora.Ora;
@@ -32,6 +33,15 @@ export class DefaultLogger {
 export const run = (command: string, spinner?: DefaultLogger) => {
   try {
     return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
+  } catch (error) {
+    spinner.fail('task fail');
+    process.exit(1);
+  }
+};
+
+export const run2 = async (command: string, spinner?: DefaultLogger) => {
+  try {
+    await exec(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
     spinner.fail('task fail');
     process.exit(1);
