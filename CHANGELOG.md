@@ -1,3 +1,21 @@
+## 2.0.4 (2022-04-04)
+
+
+### Bug Fixes
+
+* 修复git add .报错 ([6e132f1](https://github.com/lio-mengxiang/mx-deisgn-release/commit/6e132f101d822ac7897dec8bc5de00370fa6cbf2))
+* git error ([d34122d](https://github.com/lio-mengxiang/mx-deisgn-release/commit/d34122d471003d765bba6ed27ecbf88fa82ec5e1))
+* git error ([a471968](https://github.com/lio-mengxiang/mx-deisgn-release/commit/a4719680cd6daa3d7e6bd33e9cc35acad8a81255))
+
+
+### Features
+
+* add build ([22ca555](https://github.com/lio-mengxiang/mx-deisgn-release/commit/22ca555e89748981e694b360445216bf648831d3))
+* init ([af6eb91](https://github.com/lio-mengxiang/mx-deisgn-release/commit/af6eb91d4471f6a1d6fc8289001174975157b741))
+* init ([793fdac](https://github.com/lio-mengxiang/mx-deisgn-release/commit/793fdac5a5ebbb9fd509e543f6c74d1aec5bfbf5))
+
+
+
 ## 1.0.13 (2022-03-25)
 
 
