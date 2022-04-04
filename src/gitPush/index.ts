@@ -24,7 +24,7 @@ export async function _gitPush() {
   timeLog('准备推送代码至git仓库', 'start');
   run(`${GIT_ADD} .`);
   run(`${GIT_COMMIT} -m "${commitMsg}"`);
-  if(isExistCurBranch) {
+  if(!isExistCurBranch) {
     run(`git push --set-upstream origin ${curBranchName}`);
   } else {
     run(`${GIT_PUSH}`);
