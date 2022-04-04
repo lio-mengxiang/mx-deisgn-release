@@ -21,7 +21,6 @@ export async function _gitPush() {
   }
   const curBranchName = run('git symbolic-ref --short HEAD');
   const isExistCurBranch =  run(` git branch -a | grep -w ${curBranchName}`);
-  console.log('isExistCurBranch: ', isExistCurBranch);
   timeLog('准备推送代码至git仓库', 'start');
   run(`${GIT_ADD} .`);
   run(`${GIT_COMMIT} -m "${commitMsg}"`);
