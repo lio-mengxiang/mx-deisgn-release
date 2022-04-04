@@ -1,0 +1,50 @@
+{
+  "name": "@mx-design/release",
+  "version": "2.0.16",
+  "description": "Lightweight release script for Front-end project",
+  "keywords": [
+    "mx-release",
+    "mx release",
+    "release script",
+    "automated release",
+    "js release script"
+  ],
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "license": "MIT",
+  "author": "1334196450@qq.com",
+  "typings": "types/src/index.d.ts",
+  "files": [
+    "lib",
+    "bin",
+    "esm",
+    "types"
+  ],
+  "scripts": {
+    "build:types": "rimraf types && tsc --outDir types -d --emitDeclarationOnly",
+    "build:es": "rimraf esm && mx buildLib --mode esm",
+    "build:cjs": "rimraf lib && mx buildLib --mode cjs",
+    "build": "yarn build:types && yarn build:cjs && yarn build:es",
+    "clean": "rimraf esm lib types",
+    "release": "ts-node ./scripts/release.ts"
+  },
+  "dependencies": {
+    "@mx-design/cli": "1.0.2",
+    "chalk": "^4.1.1",
+    "conventional-changelog-cli": "^2.2.2",
+    "inquirer": "8.2.0",
+    "ora": "^5.1.0",
+    "rimraf": "^3.0.2",
+    "semver": "7.3.5",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "ts-node": "10.5.0"
+  },
+  "browserslist": [
+    "chrome 49",
+    "Firefox 45",
+    "safari 10"
+  ]
+}
