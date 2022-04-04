@@ -20,9 +20,7 @@ export async function _gitPush() {
     throw new Error(COMMIT_REEOR_MESSAGE);
   }
   const curBranchName = run('git symbolic-ref --short HEAD');
-  const getAllRemoteBranch =  run('git branch -r');
-  console.log('getAllRemoteBranch: ', getAllRemoteBranch);
-  const isExistCurBranch =  run(`'${getAllRemoteBranch}' | grep -w '${getAllRemoteBranch}'`);
+  const isExistCurBranch =  run(`git branch -r | grep -w origin/${curBranchName}`);
   console.log('isExistCurBranch: ', isExistCurBranch);
   timeLog('准备推送代码至git仓库', 'start');
   run(`${GIT_ADD} .`);
