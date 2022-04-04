@@ -21,14 +21,13 @@ export async function _gitPush() {
   }
   const curBranchName = run('git symbolic-ref --short HEAD');
   const isExistCurBranch =  run(`git branch -r | grep -w origin/${curBranchName}`);
-  console.log('isExistCurBranch: ', isExistCurBranch);
   timeLog('准备推送代码至git仓库', 'start');
   run(`${GIT_ADD} .`);
   run(`${GIT_COMMIT} -m "${commitMsg}"`);
   if(!isExistCurBranch) {
     run(`git push --set-upstream origin ${curBranchName}`);
   } else {
-    run(`${GIT_PUSH}`);
+    run(`${GIT_PUSH} origin ${curBranchName}`);
   }
   timeLog('已推送代码至git仓库', 'end');
   return true;
