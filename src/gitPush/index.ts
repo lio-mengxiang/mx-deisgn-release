@@ -12,8 +12,8 @@ export async function _gitPush() {
     throw new Error(COMMIT_REEOR_MESSAGE);
   }
   const spinner = new DefaultLogger(taskPre('准备推送代码至git仓库', 'start'));
-  const curBranchName = await run('git symbolic-ref --short HEAD', spinner);
-  const isExistCurBranch = await run(`git branch -r | grep -w "origin/${curBranchName}"`, spinner);
+  const curBranchName = run('git symbolic-ref --short HEAD', spinner);
+  const isExistCurBranch = run(`git branch -r | grep -w "origin/${curBranchName}"`, spinner);
   await run2(`${GIT_ADD} .`, spinner);
   await run2(`${GIT_COMMIT} -m "${commitMsg}"`, spinner);
   if (isExistCurBranch) {
