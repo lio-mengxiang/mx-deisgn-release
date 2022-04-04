@@ -31,7 +31,7 @@ export async function _gitPush() {
     run(`${GIT_PUSH}`);
   }
   timeLog('已推送代码至git仓库', 'end');
-  return false;
+  return true;
 }
 
 /**
