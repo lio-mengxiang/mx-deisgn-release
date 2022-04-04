@@ -3,9 +3,10 @@ import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
 import ora, { Color } from 'ora';
+import util from 'util';
 
 const execSync = child_process.execSync;
-const exec = child_process.exec;
+const exec = util.promisify(require('child_process').exec);
 
 export class DefaultLogger {
   private _spinner: ora.Ora;
