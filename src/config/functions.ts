@@ -11,6 +11,7 @@ export const run = (command: string) => {
   try {
     return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
+    console.log('error: ', error);
     process.exit(1);
   }
 };
