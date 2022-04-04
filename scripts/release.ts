@@ -1,2 +1,2 @@
-import defaultMain from '../src/index';
-defaultMain();
+import { compose, gitPush } from '../src/index';
+compose([gitPush]);

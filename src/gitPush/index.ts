@@ -1,4 +1,4 @@
-import { run, timeLog } from '../config/functions';
+import { DefaultLogger, run, taskPre } from '../config/functions';
 import inquirer from 'inquirer';
 import { COMMIT_REEOR_MESSAGE, GIT_ADD, GIT_COMMIT, GIT_PUSH } from '../config/constans';
 
@@ -11,18 +11,18 @@ export async function _gitPush() {
   if (!isMath) {
     throw new Error(COMMIT_REEOR_MESSAGE);
   }
-  const curBranchName = run('git symbolic-ref --short HEAD');
-  const isExistCurBranch = run(`git branch -r | grep -w "origin/${curBranchName}"`);
-
-  timeLog('准备推送代码至git仓库', 'start');
-  run(`${GIT_ADD} .`);
-  run(`${GIT_COMMIT} -m "${commitMsg}"`);
+  const spinner = new DefaultLogger(taskPre('准备推送代码至git仓库', 'start'));
+  const curBranchName = run('git symbolic-ref --short HEAD', spinner);
+  const isExistCurBranch = run(`git branch -r | grep -w "origin/${curBranchName}"`, spinner);
+  taskPre('准备推送代码至git仓库', 'start');
+  run(`${GIT_ADD} .`, spinner);
+  run(`${GIT_COMMIT} -m "${commitMsg}"`, spinner);
   if (isExistCurBranch) {
-    run(`git push --set-upstream origin ${curBranchName}`);
+    run(`git push --set-upstream origin ${curBranchName}`, spinner);
   } else {
-    run(`${GIT_PUSH}`);
+    run(`${GIT_PUSH}`, spinner);
   }
-  timeLog('已推送代码至git仓库', 'end');
+  spinner.succeed(taskPre('已推送代码至git仓库', 'end'));
   return true;
 }
 

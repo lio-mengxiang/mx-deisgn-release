@@ -2,27 +2,57 @@ import child_process from 'child_process';
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
-import ora from 'ora';
+import ora, { Color } from 'ora';
 
-const spinner = ora()
 const execSync = child_process.execSync;
 
-export const run = (command: string) => {
+export class DefaultLogger {
+  private _spinner: ora.Ora;
+
+  public constructor(startText: string) {
+    this._spinner = ora(startText).start();
+  }
+
+  public log(text: string, color?: Color): void {
+    if (color) {
+      this._spinner.color = color;
+    }
+    this._spinner.text = text;
+  }
+
+  public succeed(text: string): void {
+    this._spinner.succeed(text);
+  }
+
+  public fail(text: string): void {
+    this._spinner.fail(text);
+  }
+}
+
+export const run = (command: string, spinner?: DefaultLogger) => {
   try {
     return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
+    spinner.fail('task fail');
     process.exit(1);
+  }
+};
+
+export const taskPre = (logInfo: string, type: 'start' | 'end') => {
+  if (type === 'start') {
+    return `task start(开始任务): ${logInfo} \r\n`;
+  } else {
+    return `task end(任务结束): ${logInfo} \r\n`;
   }
 };
 
 export const timeLog = (logInfo: string, type: 'start' | 'end') => {
   if (type === 'start') {
-    spinner.start( `${chalk.cyanBright(`task start(开始任务): ${logInfo}`)} \r\n`);
+    return `task start(开始任务): ${logInfo} \r\n`;
   } else {
-    spinner.succeed(`${chalk.green(`task end(任务结束): ${logInfo}`)} \r\n`);
+    return `task end(任务结束): ${logInfo} \r\n`;
   }
 };
-
 // 获取项目文件
 export const getProjectPath = (dir = './'): string => {
   return path.join(process.cwd(), dir);

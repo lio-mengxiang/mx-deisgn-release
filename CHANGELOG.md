@@ -1,3 +1,17 @@
+## 2.2.17 (2022-04-04)
+
+
+### Bug Fixes
+
+* git add . && error ([1eaa749](https://github.com/lio-mengxiang/mx-deisgn-release/commit/1eaa749dd7e9d290cb0d89c50ef0babde67bd07b))
+
+
+### Features
+
+* init ([fc03501](https://github.com/lio-mengxiang/mx-deisgn-release/commit/fc035015f946c987ffb6c1ed75255af2a0319668))
+
+
+
 ## 2.0.4 (2022-04-04)
 
 
