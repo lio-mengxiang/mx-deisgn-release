@@ -31,7 +31,7 @@ export class DefaultLogger {
   }
 }
 
-export const run = (command: string, spinner?: DefaultLogger) => {
+export const runSync = (command: string, spinner?: DefaultLogger) => {
   try {
     return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
@@ -40,7 +40,7 @@ export const run = (command: string, spinner?: DefaultLogger) => {
   }
 };
 
-export const run2 = async (command: string, spinner?: DefaultLogger) => {
+export const runAsync = async (command: string, spinner?: DefaultLogger) => {
   try {
     await exec(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
@@ -57,13 +57,6 @@ export const taskPre = (logInfo: string, type: 'start' | 'end') => {
   }
 };
 
-export const timeLog = (logInfo: string, type: 'start' | 'end') => {
-  if (type === 'start') {
-    return `task start(开始任务): ${logInfo} \r\n`;
-  } else {
-    return `task end(任务结束): ${logInfo} \r\n`;
-  }
-};
 // 获取项目文件
 export const getProjectPath = (dir = './'): string => {
   return path.join(process.cwd(), dir);

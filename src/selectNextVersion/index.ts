@@ -2,7 +2,8 @@ import semverInc from 'semver/functions/inc';
 import { ReleaseType } from 'semver';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import { getOriginPackageJson, getProjectPath, timeLog } from '../config/functions';
+import { getOriginPackageJson, getProjectPath, taskPre, DefaultLogger } from '../config/functions';
+import { writeFile } from 'fs/promises';
 
 const currentVersion = getOriginPackageJson()?.version;
 /**
@@ -10,7 +11,7 @@ const currentVersion = getOriginPackageJson()?.version;
  * @return {*}  {({ [key in ReleaseType]: string | null })}
  */
 const getNextVersions = (): { [key in ReleaseType]: string | null } => {
-  return ({
+  return {
     major: semverInc(currentVersion, 'major'),
     minor: semverInc(currentVersion, 'minor'),
     patch: semverInc(currentVersion, 'patch'),
@@ -18,7 +19,7 @@ const getNextVersions = (): { [key in ReleaseType]: string | null } => {
     preminor: semverInc(currentVersion, 'preminor'),
     prepatch: semverInc(currentVersion, 'prepatch'),
     prerelease: semverInc(currentVersion, 'prerelease'),
-  })
+  };
 };
 
 /**
@@ -33,12 +34,10 @@ export async function _selectNextVersion(): Promise<string> {
       type: 'list',
       name: 'nextVersion',
       message: `请选择将要发布的版本 (当前版本 ${currentVersion})`,
-      choices: (Object.keys(nextVersions) as Array<ReleaseType>).map(
-        (level) => ({
-          name: `${level} => ${nextVersions[level]}`,
-          value: nextVersions[level],
-        })
-      ),
+      choices: (Object.keys(nextVersions) as Array<ReleaseType>).map((level) => ({
+        name: `${level} => ${nextVersions[level]}`,
+        value: nextVersions[level],
+      })),
     },
   ]);
   return nextVersion;
@@ -49,17 +48,14 @@ export async function _selectNextVersion(): Promise<string> {
  * @param nextVersion 新版本号
  */
 export async function _updateVersion(nextVersion: string, originPackageJson) {
-  timeLog('开始修改package.json版本号', 'start');
-  fs.writeFileSync(
+  const spinner = new DefaultLogger(taskPre('开始修改package.json版本号', 'start'));
+  await writeFile(
     getProjectPath('package.json'),
-    JSON.stringify({ ...originPackageJson, version: nextVersion }, null, 2)
+    JSON.stringify({ ...originPackageJson, version: nextVersion }, null, 2),
   );
-  timeLog('已经完成修改package.json版本号', 'end');
+  spinner.succeed(taskPre('已经完成修改package.json版本号', 'end'));
   return async () => {
-    fs.writeFileSync(
-      getProjectPath('package.json'),
-      JSON.stringify(originPackageJson, null, 2)
-    );
-    console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)')
+    fs.writeFileSync(getProjectPath('package.json'), JSON.stringify(originPackageJson, null, 2));
+    console.log('There was an error and version is being rolled back.(流程出现错误，正在回退版本)');
   };
 }

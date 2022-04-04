@@ -1,11 +1,11 @@
-import { run, timeLog } from "../config/functions";
+import { DefaultLogger, taskPre, runAsync } from '../config/functions';
 
 /**
  * 发布至npm
  */
 export async function _publishNpm() {
-  timeLog("发布", "start");
-  run("npm publish --access=public");
-  timeLog("发布", "end");
+  const spinner = new DefaultLogger(taskPre('发布', 'start'));
+  await runAsync('npm publish --access=public');
+  spinner.succeed(taskPre('发布', 'end'));
   return true;
 }
