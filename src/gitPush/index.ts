@@ -19,11 +19,18 @@ export async function _gitPush() {
   if (!isMath) {
     throw new Error(COMMIT_REEOR_MESSAGE);
   }
+  const curBranchName = run('git symbolic-ref --short HEAD');
+  const isExistCurBranch =  run(`git show-branch remotes/origin/${curBranchName}`)?.startsWith('fatal');
   timeLog('准备推送代码至git仓库', 'start');
   run(`${GIT_ADD} .`);
-  run(`${GIT_COMMIT} -m "${commitMsg}" && ${GIT_PUSH}`);
+  run(`${GIT_COMMIT} -m "${commitMsg}"`);
+  if(isExistCurBranch) {
+    run(`git push --set-upstream origin ${curBranchName}`);
+  } else {
+    run(`${GIT_PUSH}`);
+  }
   timeLog('已推送代码至git仓库', 'end');
-  return true;
+  return false;
 }
 
 /**

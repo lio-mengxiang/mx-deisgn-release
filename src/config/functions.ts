@@ -9,7 +9,7 @@ const execSync = child_process.execSync;
 
 export const run = (command: string) => {
   try {
-    execSync(command, { cwd: process.cwd() });
+    return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
     process.exit(1);
   }
