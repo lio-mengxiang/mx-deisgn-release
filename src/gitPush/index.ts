@@ -36,12 +36,12 @@ export async function _gitPush() {
   isMathCommit(commitMsg);
 
   const spinner = new DefaultLogger(taskPre('准备推送代码至git仓库', 'start'));
-  const curBranchName = runSync('git symbolic-ref --short HEAD', spinner);
-  const isExistCurBranch = runSync(`git branch -r | grep -w "origin/${curBranchName}"`, spinner);
+  const curBranchName = runSync('git symbolic-ref --short HEAD');
+  const isExistCurBranch = runSync(`git branch -r | grep -w "origin/${curBranchName}"`);
 
   await runAsync(`${GIT_ADD} .`, spinner, true);
   await runAsync(`${GIT_COMMIT} -m "${commitMsg}"`, spinner, true);
-  if (isExistCurBranch) {
+  if (!isExistCurBranch) {
     await runAsync(`git push --set-upstream origin ${curBranchName}`, spinner, true);
   } else {
     await runAsync(`${GIT_PUSH}`, spinner, true);
