@@ -1,5 +1,5 @@
-import { taskPre, getProjectPath, DefaultLogger, runAsync } from '../config/functions';
 import fs, { existsSync } from 'fs';
+import { taskPre, getProjectPath, DefaultLogger, runAsync } from '../config/functions';
 import { CHANGELOG_NAME } from '../config/constans';
 
 export const getOldLog = () => {

@@ -2,14 +2,15 @@ import semverInc from 'semver/functions/inc';
 import { ReleaseType } from 'semver';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import { getOriginPackageJson, getProjectPath, taskPre, DefaultLogger } from '../config/functions';
 import { writeFile } from 'fs/promises';
+import { getOriginPackageJson, getProjectPath, taskPre, DefaultLogger } from '../config/functions';
 
 const currentVersion = getOriginPackageJson()?.version;
 /**
  * 列出所有下一个版本的列表
  * @return {*}  {({ [key in ReleaseType]: string | null })}
  */
+// eslint-disable-next-line no-unused-vars
 const getNextVersions = (): { [key in ReleaseType]: string | null } => {
   return {
     major: semverInc(currentVersion, 'major'),

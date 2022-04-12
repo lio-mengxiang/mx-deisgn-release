@@ -1,6 +1,6 @@
 {
   "name": "@mx-design/release",
-  "version": "2.2.19",
+  "version": "2.2.20",
   "description": "Lightweight release script for Front-end project",
   "keywords": [
     "mx-release",
@@ -29,18 +29,35 @@
     "release": "ts-node ./scripts/release.ts"
   },
   "dependencies": {
-    "@mx-design/cli": "1.0.2",
+    "@mx-design/cli": "1.0.13",
     "chalk": "^4.1.1",
     "conventional-changelog-cli": "^2.2.2",
     "inquirer": "8.2.0",
     "ora": "^5.1.0",
     "rimraf": "^3.0.2",
     "semver": "7.3.5",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "stylelint": "^14.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^24.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "ts-node": "10.7.0",
+    "postcss-less": "4.0.1",
+    "prettier": "^2.5.0",
+    "pretty-quick": "^3.1.2"
   },
   "devDependencies": {
-    "@types/node": "^15.3.0",
-    "ts-node": "10.5.0"
+    "@types/node": "^15.3.0"
   },
   "browserslist": [
     "chrome 49",

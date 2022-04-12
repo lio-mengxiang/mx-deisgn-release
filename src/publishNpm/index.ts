@@ -5,7 +5,7 @@ import { DefaultLogger, taskPre, runAsync } from '../config/functions';
  */
 export async function _publishNpm() {
   const spinner = new DefaultLogger(taskPre('发布', 'start'));
-  await runAsync('npm publish --access=public');
-  spinner.succeed(taskPre('发布', 'end'));
+  await runAsync('npm publish --access=public', spinner);
+  spinner.succeed(taskPre('发布完成', 'end'));
   return true;
 }

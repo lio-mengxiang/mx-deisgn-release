@@ -5,8 +5,8 @@ import fs from 'fs';
 import ora, { Color } from 'ora';
 import util from 'util';
 
-const execSync = child_process.execSync;
-const exec = util.promisify(require('child_process').exec);
+const { execSync } = child_process;
+const exec = util.promisify(child_process.exec);
 
 export class DefaultLogger {
   private _spinner: ora.Ora;
@@ -35,16 +35,17 @@ export const runSync = (command: string, spinner?: DefaultLogger) => {
   try {
     return execSync(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
-    spinner.fail('task fail');
+    spinner?.fail?.('task fail');
     process.exit(1);
   }
 };
 
-export const runAsync = async (command: string, spinner?: DefaultLogger) => {
+export const runAsync = async (command: string, spinner?: DefaultLogger, hasError?: boolean) => {
   try {
     await exec(command, { cwd: process.cwd(), encoding: 'utf8' });
   } catch (error) {
-    spinner.fail('task fail');
+    if (hasError) console.log(error);
+    spinner?.fail?.('task fail');
     process.exit(1);
   }
 };
@@ -52,9 +53,8 @@ export const runAsync = async (command: string, spinner?: DefaultLogger) => {
 export const taskPre = (logInfo: string, type: 'start' | 'end') => {
   if (type === 'start') {
     return `task start(开始任务): ${logInfo} \r\n`;
-  } else {
-    return `task end(任务结束): ${logInfo} \r\n`;
   }
+  return `task end(任务结束): ${logInfo} \r\n`;
 };
 
 // 获取项目文件
@@ -63,9 +63,9 @@ export const getProjectPath = (dir = './'): string => {
 };
 
 export function compose(middleware) {
-  const otherOptions = {};
+  const _otherOptions = {};
   function dispatch(index, otherOptions) {
-    if (index == middleware.length) return;
+    if (index === middleware.length) return;
     const currMiddleware = middleware[index];
     currMiddleware((addOptions) => {
       dispatch(++index, { ...otherOptions, ...addOptions });
@@ -73,7 +73,7 @@ export function compose(middleware) {
       console.log('💣 发布失败，失败原因：', error);
     });
   }
-  dispatch(0, otherOptions);
+  dispatch(0, _otherOptions);
 }
 
 /**

@@ -7,13 +7,5 @@
   "printWidth": 120,
   "proseWrap": "never",
   "bracketSpacing": true,
-  "arrowParens": "always",
-  "overrides": [
-    {
-      "files": ".prettierrc",
-      "options": {
-        "parser": "json"
-      }
-    }
-  ]
+  "arrowParens": "always"
 }

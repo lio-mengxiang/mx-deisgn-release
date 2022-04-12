@@ -13,8 +13,9 @@ import { getOldLog, _setChangelog } from './setChangelog';
 import { _build } from './build';
 import { _publishNpm } from './publishNpm';
 import { _addTag } from './addTag';
-import {} from './config/constans';
-import { compose, getOriginPackageJson, basicCatchError } from './config/functions';
+import { _eslint } from './eslint';
+import { compose, getOriginPackageJson, basicCatchError, getProjectPath } from './config/functions';
+import { _stylelint } from './stylelint';
 
 const getNextVersion = async (next) => {
   const nextVersion = await _selectNextVersion();
@@ -62,6 +63,26 @@ const build = async (next, otherOptions) => {
   next();
 };
 
+const eslint = function eslint(srcDir = getProjectPath('./src/'), configDir = getProjectPath('./.eslintrc.js')) {
+  return async (next, otherOptions) => {
+    const buildResult = await _eslint(srcDir, configDir).catch(basicCatchError);
+    if (!buildResult) {
+      return otherOptions?.backVersionFn();
+    }
+    next();
+  };
+};
+
+const stylelint = function stylelint(srcDir = getProjectPath('./src/'), configDir = getProjectPath('./.stylelint.js')) {
+  return async (next, otherOptions) => {
+    const buildResult = await _stylelint(srcDir, configDir).catch(basicCatchError);
+    if (!buildResult) {
+      return otherOptions?.backVersionFn();
+    }
+    next();
+  };
+};
+
 const publishNpm = async (next) => {
   const publishResult = await _publishNpm().catch(basicCatchError);
   if (!publishResult) {
@@ -84,5 +105,5 @@ async function defaultMain() {
   compose(middle);
 }
 
-export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, updateVersion, compose };
+export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, updateVersion, compose, eslint, stylelint };
 export default defaultMain;
