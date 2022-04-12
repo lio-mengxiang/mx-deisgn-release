@@ -105,5 +105,17 @@ async function defaultMain() {
   compose(middle);
 }
 
-export { getNextVersion, gitPush, setChangelog, build, publishNpm, addTag, updateVersion, compose, eslint, stylelint };
+export {
+  getNextVersion,
+  gitPush,
+  setChangelog,
+  build,
+  publishNpm,
+  addTag,
+  updateVersion,
+  compose,
+  eslint,
+  stylelint,
+  getProjectPath,
+};
 export default defaultMain;
