@@ -39,12 +39,12 @@ export async function _gitPush() {
   const curBranchName = runSync('git symbolic-ref --short HEAD', spinner);
   const isExistCurBranch = runSync(`git branch -r | grep -w "origin/${curBranchName}"`, spinner);
 
-  await runAsync(`${GIT_ADD} .`, spinner);
-  await runAsync(`${GIT_COMMIT} -m "${commitMsg}"`, spinner);
+  await runAsync(`${GIT_ADD} .`, spinner, true);
+  await runAsync(`${GIT_COMMIT} -m "${commitMsg}"`, spinner, true);
   if (isExistCurBranch) {
-    await runAsync(`git push --set-upstream origin ${curBranchName}`, spinner);
+    await runAsync(`git push --set-upstream origin ${curBranchName}`, spinner, true);
   } else {
-    await runAsync(`${GIT_PUSH}`, spinner);
+    await runAsync(`${GIT_PUSH}`, spinner, true);
   }
 
   spinner.succeed(taskPre('已推送代码至git仓库', 'end'));
